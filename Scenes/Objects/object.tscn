@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://csmtr8mfs2w08"]
+[gd_scene load_steps=6 format=3 uid="uid://csmtr8mfs2w08"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/object.gd" id="1_bca64"]
 [ext_resource type="Texture2D" uid="uid://bstwtebl0bo41" path="res://Assets/Graphics/Tilesets/Objects.png" id="1_c1jvt"]
 [ext_resource type="Texture2D" uid="uid://b4v2gi1og7sl4" path="res://Assets/Graphics/Tilesets/light.png" id="2_k03ps"]
+[ext_resource type="Texture2D" uid="uid://camsdtinay2xp" path="res://Assets/Graphics/Tilesets/DestroyedObjects.png" id="3_wtxo6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_php8q"]
 size = Vector2(52, 52)
@@ -18,10 +19,17 @@ script = ExtResource("1_bca64")
 texture = ExtResource("1_c1jvt")
 hframes = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Options/Crate"]
+[node name="Collision" type="CollisionShape2D" parent="Options/Crate"]
 shape = SubResource("RectangleShape2D_php8q")
 
-[node name="SpriteBroken" type="Sprite2D" parent="Options/Crate"]
+[node name="SpriteDestroyed" type="Sprite2D" parent="Options/Crate"]
+visible = false
+texture = ExtResource("3_wtxo6")
+hframes = 5
+
+[node name="CollisionDestroyed" type="CollisionPolygon2D" parent="Options/Crate"]
+visible = false
+polygon = PackedVector2Array(-26, 26, 26, 26, 26, -18, 24, -18, 24, -20, 22, -20, 22, -24, 20, -24, 20, -26, -4, -26, -4, -24, -6, -24, -6, -22, -8, -22, -8, -20, -10, -20, -10, -18, -12, -18, -12, -16, -14, -16, -14, -12, -16, -12, -16, -10, -18, -10, -18, -8, -20, -8, -20, -6, -24, -6, -24, -4, -26, -4)
 
 [node name="Barrel" type="StaticBody2D" parent="Options"]
 visible = false
@@ -31,8 +39,14 @@ texture = ExtResource("1_c1jvt")
 hframes = 5
 frame = 1
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Options/Barrel"]
+[node name="Collision" type="CollisionPolygon2D" parent="Options/Barrel"]
 polygon = PackedVector2Array(-16, 26, 16, 26, 16, 24, 18, 24, 18, 16, 20, 16, 20, 8, 22, 8, 22, -6, 20, -6, 20, -12, 18, -12, 18, -20, 16, -20, 16, -22, -16, -22, -16, -20, -18, -20, -18, -12, -20, -12, -20, -6, -22, -6, -22, 8, -20, 8, -20, 16, -18, 16, -18, 24, -16, 24)
+
+[node name="CollisionDestroyed" type="CollisionPolygon2D" parent="Options/Barrel"]
+
+[node name="SpriteDestroyed" type="Sprite2D" parent="Options/Barrel"]
+texture = ExtResource("3_wtxo6")
+hframes = 5
 
 [node name="Lamp" type="StaticBody2D" parent="Options"]
 visible = false
