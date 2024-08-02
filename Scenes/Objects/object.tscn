@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://csmtr8mfs2w08"]
+
+[ext_resource type="Texture2D" uid="uid://bstwtebl0bo41" path="res://Assets/Graphics/Tilesets/Objects.png" id="1_c1jvt"]
+
+[node name="Object" type="Node2D"]
+
+[node name="Options" type="Node2D" parent="."]
+
+[node name="Crate" type="StaticBody2D" parent="Options"]
+
+[node name="Sprite" type="Sprite2D" parent="Options/Crate"]
+texture = ExtResource("1_c1jvt")
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Options/Crate"]
+
+[node name="Barrel" type="StaticBody2D" parent="Options"]
+
+[node name="Lamp" type="StaticBody2D" parent="Options"]
+
+[node name="FireHydrant" type="StaticBody2D" parent="Options"]
