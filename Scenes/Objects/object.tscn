@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://csmtr8mfs2w08"]
+[gd_scene load_steps=5 format=3 uid="uid://csmtr8mfs2w08"]
 
+[ext_resource type="Script" path="res://Scenes/Objects/object.gd" id="1_bca64"]
 [ext_resource type="Texture2D" uid="uid://bstwtebl0bo41" path="res://Assets/Graphics/Tilesets/Objects.png" id="1_c1jvt"]
+[ext_resource type="Texture2D" uid="uid://b4v2gi1og7sl4" path="res://Assets/Graphics/Tilesets/light.png" id="2_k03ps"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_php8q"]
+size = Vector2(52, 52)
 
 [node name="Object" type="Node2D"]
+script = ExtResource("1_bca64")
 
 [node name="Options" type="Node2D" parent="."]
 
@@ -13,9 +19,52 @@ texture = ExtResource("1_c1jvt")
 hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Options/Crate"]
+shape = SubResource("RectangleShape2D_php8q")
+
+[node name="SpriteBroken" type="Sprite2D" parent="Options/Crate"]
 
 [node name="Barrel" type="StaticBody2D" parent="Options"]
+visible = false
+
+[node name="Sprite" type="Sprite2D" parent="Options/Barrel"]
+texture = ExtResource("1_c1jvt")
+hframes = 5
+frame = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Options/Barrel"]
+polygon = PackedVector2Array(-16, 26, 16, 26, 16, 24, 18, 24, 18, 16, 20, 16, 20, 8, 22, 8, 22, -6, 20, -6, 20, -12, 18, -12, 18, -20, 16, -20, 16, -22, -16, -22, -16, -20, -18, -20, -18, -12, -20, -12, -20, -6, -22, -6, -22, 8, -20, 8, -20, 16, -18, 16, -18, 24, -16, 24)
 
 [node name="Lamp" type="StaticBody2D" parent="Options"]
+visible = false
+
+[node name="PointLight2D" type="PointLight2D" parent="Options/Lamp"]
+position = Vector2(1, -86)
+scale = Vector2(0.676732, 0.680001)
+color = Color(1, 1, 0.592157, 1)
+energy = 2.03
+texture = ExtResource("2_k03ps")
+
+[node name="Sprite" type="Sprite2D" parent="Options/Lamp"]
+texture = ExtResource("1_c1jvt")
+hframes = 5
+frame = 2
+
+[node name="Sprite2" type="Sprite2D" parent="Options/Lamp"]
+position = Vector2(0, -64)
+texture = ExtResource("1_c1jvt")
+hframes = 5
+frame = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Options/Lamp"]
+polygon = PackedVector2Array(-16, 32, 16, 32, 16, 30, 14, 30, 14, 26, 12, 26, 12, 20, 10, 20, 10, 12, 8, 12, 8, 5, 6, 5, 6, -22, 8, -22, 8, -24, 12, -24, 12, -28, 10, -28, 10, -30, 9, -30, 8, -30, 8, -32, 6, -32, 6, -66, 10, -66, 10, -70, 8, -70, 8, -72, 7, -72, 6, -72, 6, -77, 10, -77, 10, -73, 11, -73, 12, -73, 12, -71, 14, -71, 14, -69, 20, -69, 20, -71, 22, -71, 22, -73, 24, -73, 24, -75, 26, -75, 26, -81, 28, -81, 28, -83, 30, -83, 30, -91, 29, -91, 28, -91, 28, -93, 32, -93, 32, -95, 29, -95, 28, -95, 28, -96, 22, -96, 22, -95, 18, -95, 18, -93, 22, -93, 22, -92, 22, -91, 20, -91, 20, -83, 22, -83, 22, -81, 24, -81, 24, -76, 23, -75, 22, -75, 22, -74, 20, -73, 20, -72, 18, -71, 15, -71, 14, -72, 14, -75, 12, -75, 12, -77, 10, -78, 10, -79, 6, -79, 6, -83, 4, -83, 4, -85, 8, -85, 8, -87, 10, -87, 10, -93, 8, -93, 8, -95, 6, -95, 6, -96, -6, -96, -6, -95, -8, -95, -8, -93, -10, -93, -10, -87, -8, -87, -8, -85, -4, -85, -4, -83, -6, -83, -6, -79, -10, -79, -10, -77, -12, -77, -12, -75, -14, -75, -14, -71, -20, -71, -20, -73, -22, -73, -22, -75, -24, -75, -24, -81, -22, -81, -22, -83, -20, -83, -20, -91, -22, -91, -22, -93, -18, -93, -18, -95, -22, -95, -22, -96, -28, -96, -28, -95, -32, -95, -32, -93, -28, -93, -28, -91, -30, -91, -30, -83, -28, -83, -28, -81, -26, -81, -26, -75, -25, -75, -24, -73, -23, -73, -22, -71, -21, -71, -20, -69, -14, -69, -13, -71, -12, -71, -12, -73, -10, -73, -10, -76, -9, -77, -6, -77, -6, -72, -8, -72, -8, -70, -10, -70, -10, -66, -6, -66, -6, -32, -8, -32, -8, -31, -8, -30, -10, -30, -10, -28, -12, -28, -12, -24, -8, -24, -8, -22, -6, -22, -6, 5, -8, 5, -8, 12, -10, 12, -10, 20, -12, 20, -12, 26, -14, 26, -14, 30, -16, 30)
 
 [node name="FireHydrant" type="StaticBody2D" parent="Options"]
+visible = false
+
+[node name="Sprite" type="Sprite2D" parent="Options/FireHydrant"]
+texture = ExtResource("1_c1jvt")
+hframes = 5
+frame = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Options/FireHydrant"]
+polygon = PackedVector2Array(-16, 32, 16, 32, 16, 26, 14, 26, 14, 24, 12, 24, 12, 8, 14, 8, 14, 6, 16, 6, 16, 4, 18, 4, 18, 0, 16, 0, 16, -2, 14, -2, 14, -4, 12, -4, 12, -14, 14, -14, 14, -16, 18, -16, 18, -18, 20, -18, 20, -22, 18, -22, 18, -24, 16, -24, 16, -26, 14, -26, 14, -28, 8, -28, 8, -30, 3, -30, 2, -30, 2, -32, -2, -32, -2, -30, -8, -30, -8, -28, -14, -28, -14, -26, -16, -26, -16, -24, -18, -24, -18, -22, -20, -22, -20, -18, -18, -18, -18, -16, -15, -16, -14, -16, -14, -14, -12, -14, -12, -4, -14, -4, -14, -2, -16, -2, -16, 0, -18, 0, -18, 4, -16, 4, -16, 6, -14, 6, -14, 8, -12, 8, -12, 24, -14, 24, -14, 26, -16, 26)
