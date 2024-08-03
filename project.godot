@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/Levels/map.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://Global/global.gd"
+
 [display]
 
 window/size/viewport_width=1024
@@ -22,4 +26,5 @@ window/size/viewport_height=768
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"

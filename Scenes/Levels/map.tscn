@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dn00su8pqnqjl"]
+[gd_scene load_steps=5 format=3 uid="uid://dn00su8pqnqjl"]
 
 [ext_resource type="Shader" path="res://Scenes/Levels/map.gdshader" id="1_4dn2k"]
 [ext_resource type="Texture2D" uid="uid://dkofhqgij3op7" path="res://Assets/Graphics/Map/Road.png" id="1_xg085"]
+[ext_resource type="PackedScene" uid="uid://csmtr8mfs2w08" path="res://Scenes/Objects/object.tscn" id="3_bux2m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_heaa6"]
 shader = ExtResource("1_4dn2k")
@@ -20,3 +21,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_xg085")
+
+[node name="Object" parent="." instance=ExtResource("3_bux2m")]
+position = Vector2(560, 422)

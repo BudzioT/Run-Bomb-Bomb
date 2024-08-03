@@ -11,20 +11,22 @@ extends Node2D
 		if value and get_child_count() > 0:
 			type = value
 			
-			# Dictionary of objects
-			const objects = {
-				"Crate": 0,
-				"Barrel": 1,
-				"Lamp": 2,
-				"FireHydrant": 3
-			}
-			
 			# Hide other objects
 			for object in $Options.get_children():
 				object.hide()
 			
 			# Show the correct one
-			var properObject = $Options.get_child(objects[type])
-			properObject.show()
+			var current_object = $Options.get_child(Global.objects[type])
+			current_object.show()
+	
+# Object is destroyed flag		
+@export var destroyed: bool = false:
+	# Setter
+	set(value):
+		# If there is properly set type and a correct value
+		if type and value and get_child_count() > 0:
+			destroyed = value
 			
-@export var destroyed: bool = false
+			# Hide the normal object if destroyed is the correct one
+			if destroyed:
+				$Options.get_child(Global.objects[type])
