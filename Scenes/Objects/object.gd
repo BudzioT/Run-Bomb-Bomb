@@ -18,15 +18,39 @@ extends Node2D
 			# Show the correct one
 			var current_object = $Options.get_child(Global.objects[type])
 			current_object.show()
+			
+			if destroyed:
+				destroyed = true
+			else:
+				destroyed = false
 	
 # Object is destroyed flag		
 @export var destroyed: bool = false:
 	# Setter
 	set(value):
 		# If there is properly set type and a correct value
-		if type and value and get_child_count() > 0:
+		if type and value != null and get_child_count() > 0:
 			destroyed = value
+			
+			# Current object
+			var object = $Options.get_child(Global.objects[type])
 			
 			# Hide the normal object if destroyed is the correct one
 			if destroyed:
-				$Options.get_child(Global.objects[type])
+				# Hide the normal sprite and collisions
+				object.get_node("Sprite").hide()
+				object.get_node("Collision").hide()
+				
+				# Show the destroyed ones
+				object.get_node("SpriteDestroyed").show()
+				object.get_node("CollisionDestroyed").show()
+			
+			# Otherwise hide destroyed object and show normal one
+			else:
+				# Hide the normal sprite and collisions
+				object.get_node("SpriteDestroyed").hide()
+				object.get_node("CollisionDestroyed").hide()
+				
+				# Show the destroyed ones
+				object.get_node("Sprite").show()
+				object.get_node("Collision").show()
