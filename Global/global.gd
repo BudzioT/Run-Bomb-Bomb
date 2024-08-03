@@ -21,5 +21,8 @@ const starting_point: int = 131
 # Speed of map scroll
 const scroll_speed: float = 1.0
 
+# Difficulty increase
+var difficulty_increase: float = 1.1
+
 # Array of road positions
 var roads = []

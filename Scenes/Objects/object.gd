@@ -54,3 +54,18 @@ extends Node2D
 				# Show the destroyed ones
 				object.get_node("Sprite").show()
 				object.get_node("Collision").show()
+
+# Movement variables				
+@export_category("Movement")
+@export var speed: int = 10
+
+
+"""---------------------------- GLOBAL VARIABLES ----------------------------"""
+func _process(delta: float) -> void:
+	"""Process object's changes over frames"""
+	# Move the object
+	position.x -= speed * delta
+	
+	# If it's too far away, remove it
+	if position.x < -100:
+		queue_free()
