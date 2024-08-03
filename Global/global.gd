@@ -1,6 +1,7 @@
 extends Node
 
 
+"""---------------------------- GLOBAL VARIABLES ----------------------------"""
 # Dictionary of objects
 const objects = {
 	"Crate": 0,
@@ -8,3 +9,6 @@ const objects = {
 	"Lamp": 2,
 	"FireHydrant": 3
 }
+
+# Last road index
+const last_road_index = 3

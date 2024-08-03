@@ -1,32 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://dn00su8pqnqjl"]
+[gd_scene load_steps=6 format=3 uid="uid://dn00su8pqnqjl"]
 
 [ext_resource type="Shader" path="res://Scenes/Levels/map.gdshader" id="1_4dn2k"]
 [ext_resource type="Texture2D" uid="uid://dkofhqgij3op7" path="res://Assets/Graphics/Map/Road.png" id="1_xg085"]
 [ext_resource type="PackedScene" uid="uid://bg176qx1qv7cn" path="res://Scenes/Entities/Player/player.tscn" id="3_ybqf7"]
+[ext_resource type="PackedScene" uid="uid://pfndxjithunk" path="res://Scenes/Helpers/road.tscn" id="4_7npes"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_heaa6"]
 shader = ExtResource("1_4dn2k")
 shader_parameter/scrollSpeed = 0.2
 
-[node name="Map" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Map" type="Node2D"]
 
 [node name="Sprite" type="TextureRect" parent="."]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_heaa6")
-layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_xg085")
 
-[node name="Enitties" type="Node2D" parent="."]
+[node name="Roads" type="Node2D" parent="."]
 
-[node name="Player" parent="Enitties" instance=ExtResource("3_ybqf7")]
-position = Vector2(79, 295)
+[node name="Road" parent="Roads" instance=ExtResource("4_7npes")]
+position = Vector2(0, 149)
+
+[node name="Road2" parent="Roads" instance=ExtResource("4_7npes")]
+position = Vector2(0, 306)
+
+[node name="Road3" parent="Roads" instance=ExtResource("4_7npes")]
+position = Vector2(0, 463)
+
+[node name="Road4" parent="Roads" instance=ExtResource("4_7npes")]
+position = Vector2(0, 619)
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Roads" type="Node2D" parent="."]
+[node name="Enitties" type="Node2D" parent="."]
+
+[node name="Player" parent="Enitties" instance=ExtResource("3_ybqf7")]
+position = Vector2(75, 290)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=45 format=3 uid="uid://bg176qx1qv7cn"]
+[gd_scene load_steps=46 format=3 uid="uid://bg176qx1qv7cn"]
 
 [ext_resource type="Texture2D" uid="uid://b3cnjxnx8o5wq" path="res://Assets/Graphics/Bomb/bombIdle.png" id="1_0xs4u"]
+[ext_resource type="Script" path="res://Scenes/Entities/Player/player.gd" id="1_k2pvy"]
 [ext_resource type="Texture2D" uid="uid://bejlynoa7qdw2" path="res://Assets/Graphics/Bomb/bombIdleAttack.png" id="2_x86jl"]
 [ext_resource type="Texture2D" uid="uid://c68ca8bo1rcfn" path="res://Assets/Graphics/Bomb/bombJump.png" id="3_o87k2"]
 [ext_resource type="Texture2D" uid="uid://dubpg1ve8hk43" path="res://Assets/Graphics/Bomb/bombJumpAttack.png" id="4_nm41q"]
@@ -505,6 +506,8 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 14
+script = ExtResource("1_k2pvy")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 libraries = {

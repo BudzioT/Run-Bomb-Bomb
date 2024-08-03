@@ -54,3 +54,6 @@ extends Node2D
 				# Show the destroyed ones
 				object.get_node("Sprite").show()
 				object.get_node("Collision").show()
+				
+# Size of road in pixels
+@export var roadSize: int = 152
