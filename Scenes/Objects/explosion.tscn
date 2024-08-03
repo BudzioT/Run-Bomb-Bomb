@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://wr7t8ujw3orb"]
+[gd_scene load_steps=32 format=3 uid="uid://wr7t8ujw3orb"]
 
 [ext_resource type="Texture2D" uid="uid://bbrtsicviuhqj" path="res://Assets/Graphics/Effects/explosion1.png" id="1_qqjke"]
 [ext_resource type="Texture2D" uid="uid://caihbnbo8kb6m" path="res://Assets/Graphics/Effects/explosion0.png" id="1_ylk6v"]
@@ -160,8 +160,8 @@ animations = [{
 "texture": SubResource("AtlasTexture_xw33g")
 }],
 "loop": false,
-"name": &"huge",
-"speed": 7.0
+"name": &"Huge",
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -195,13 +195,31 @@ animations = [{
 "texture": SubResource("AtlasTexture_d4rmf")
 }],
 "loop": false,
-"name": &"normal",
-"speed": 5.0
+"name": &"Normal",
+"speed": 8.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1g5"]
+size = Vector2(96.5653, 60.7965)
+
 [node name="Explosion" type="AnimatedSprite2D"]
+position = Vector2(0, -0.999999)
+scale = Vector2(1.34375, 1.32813)
 sprite_frames = SubResource("SpriteFrames_8jk7t")
-animation = &"huge"
+animation = &"Huge"
+autoplay = "Normal"
 script = ExtResource("3_pr8se")
 
+[node name="AttackArea" type="Area2D" parent="."]
+position = Vector2(-1.43051e-06, -7.15256e-07)
+scale = Vector2(0.631372, 0.752491)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, -1.0006)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_gk1g5")
+
 [connection signal="animation_finished" from="." to="." method="_animation_finished"]
+[connection signal="body_entered" from="AttackArea" to="." method="_attack_area_entered"]

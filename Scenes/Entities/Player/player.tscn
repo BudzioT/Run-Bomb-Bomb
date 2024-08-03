@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bg176qx1qv7cn"]
+[gd_scene load_steps=45 format=3 uid="uid://bg176qx1qv7cn"]
 
 [ext_resource type="Texture2D" uid="uid://b3cnjxnx8o5wq" path="res://Assets/Graphics/Bomb/bombIdle.png" id="1_0xs4u"]
 [ext_resource type="Script" path="res://Scenes/Entities/Player/player.gd" id="1_k2pvy"]
@@ -128,6 +128,20 @@ tracks/4/keys = {
 "update": 1,
 "values": ["Idle"]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_explode"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_qpwny"]
 resource_name = "Jump"
@@ -246,6 +260,20 @@ tracks/4/keys = {
 "update": 1,
 "values": ["Run"]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_explode"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_ciki0"]
 resource_name = "Jump_Attack"
@@ -308,6 +336,20 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["Jump"]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_explode"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1rmal"]
@@ -539,9 +581,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1g5"]
-size = Vector2(119.313, 87.5)
-
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 14
 script = ExtResource("1_k2pvy")
@@ -577,17 +616,3 @@ one_shot = true
 
 [node name="AttackCooldown" type="Timer" parent="Timers"]
 one_shot = true
-
-[node name="ExplodeDuration" type="Timer" parent="Timers"]
-wait_time = 0.5
-one_shot = true
-
-[node name="AttackArea" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(-2, 9)
-shape = SubResource("RectangleShape2D_gk1g5")
-
-[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_entered"]

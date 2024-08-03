@@ -14,6 +14,8 @@ extends Node2D
 
 # Scene with objects
 @export var object_scene: PackedScene
+# Explosion one
+@export var explosion_scene: PackedScene
 
 
 """---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
@@ -29,6 +31,9 @@ func _ready():
 	# Place correctly all the spawners
 	for index in $Spawners.get_child_count():
 		$Spawners.get_child(index).position[1] = Global.roads[index][1]
+		
+	# Connect proper explosion function to the signal
+	$Enitties/Player.connect("explode", _create_explosion)
 		
 func _process(_delta: float):
 	"""Process map changes over time"""
@@ -64,3 +69,19 @@ func _spawn_objects():
 	
 	# Start the cooldown
 	$Timers/Spawn.start()
+	
+func _create_explosion(pos: Vector2, type: int):
+	"""Create explosion when needed"""
+	# Create an explosion scene, add it to the current one
+	var explosion = explosion_scene.instantiate()
+	$Effects.add_child(explosion)
+	
+	# Set its position
+	explosion.position = pos
+	# Set its type
+	explosion.explosion_type = type
+	
+	if type == 0:
+		explosion.play("Normal")
+	else:
+		explosion.play("Huge")

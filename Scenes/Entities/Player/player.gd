@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 """---------------------------- SIGNALS ----------------------------"""
-signal explode(pos: Vector2)
+signal explode(pos: Vector2, type: int)
 
 
 """---------------------------- GLOBAL VARIABLES ----------------------------"""
@@ -144,25 +144,14 @@ func _explode():
 	"""Explode the bomb"""
 	# Emit particles
 	
-	# Start the explosion attack
-	$Timers/ExplodeDuration.start()
-	
+	# Choose a type
+	var type: int = 0
+	# If amount is high enough, choose the longer one
+	if explosions > 3:
+		type = 1
+		
 	# Emit explosion signal
-	explode.emit()
+	explode.emit(position, type)
 	
 	# Decrease the amount of explosions
 	# explosions -= 1
-
-
-func _on_attack_area_entered(body: Node2D) -> void:
-	"""Handle object entering player's attack area"""
-	# If there is currently an explosion going on
-	if Global.explode:
-		# If the object is already partially destroyed, make it dissapear
-		if body.destroyed:
-			body.queue_free()
-			Global.score += 20
-		# Otherwise set its state to destroyed
-		else:
-			body.destroyed = true
-			Global.score += 10

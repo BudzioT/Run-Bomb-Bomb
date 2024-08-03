@@ -29,3 +29,7 @@ var roads = []
 
 # Explosion flag
 var explode = false
+
+
+# Player's score
+var score = 0
