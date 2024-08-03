@@ -1,4 +1,4 @@
-# Metroid game
+# Run Bomb Bomb!
 ## :computer: Info
 An endless runner game made in Godot using GDScript as an Mini Jam Destruction themed entry.<br>
 Currently there is attack mechanics, and movement + random objects are spawning.<br>
