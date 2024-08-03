@@ -280,7 +280,7 @@ tracks/2/path = NodePath("PointLight2D:enabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.999),
+"times": PackedFloat32Array(0, 0.9657),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -304,7 +304,7 @@ tracks/4/path = NodePath(".:state")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.9657),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["Jump"]
@@ -578,8 +578,16 @@ one_shot = true
 [node name="AttackCooldown" type="Timer" parent="Timers"]
 one_shot = true
 
+[node name="ExplodeDuration" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
 [node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2(-2, 9)
 shape = SubResource("RectangleShape2D_gk1g5")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_entered"]

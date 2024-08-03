@@ -1,6 +1,10 @@
 extends CharacterBody2D
 
 
+"""---------------------------- SIGNALS ----------------------------"""
+signal explode(pos: Vector2)
+
+
 """---------------------------- GLOBAL VARIABLES ----------------------------"""
 @export_category("Movement")
 @export var speed: int = 200
@@ -24,6 +28,10 @@ var vertical_direction: int = 0
 # Idle state flag
 @export var state: String = "Run"
 
+@export_category("Game")
+# Number of explosions left
+@export var explosions: int = 5
+
 
 """---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
 func _ready():
@@ -41,6 +49,7 @@ func _physics_process(_delta: float) -> void:
 		
 		# Animate him
 		_animate()
+		
 
 """---------------------------- USER DEFINED FUNCTIONS ----------------------------"""
 func _handle_input():
@@ -75,6 +84,8 @@ func _handle_input():
 		# Create a tween for moving vertically
 		var tween = create_tween()
 		tween.tween_property(self, "position:y", newPos, 1.0 / Global.scroll_speed)
+		# Wait for the animation to finish
+		tween.tween_interval(min(0.6 * Global.scroll_speed, 1.2))
 		# On ending moving, return the animation to run
 		tween.tween_callback(_run)
 		
@@ -86,7 +97,7 @@ func _handle_input():
 	
 	# Check for attacks
 	if Input.is_action_just_pressed("Attack") and not $Timers/AttackCooldown.time_left:
-		_explode()
+		_handle_attack()
 	
 		
 func _move():
@@ -97,17 +108,24 @@ func _move():
 	# Apply movement
 	move_and_slide()
 	
-func _explode():
+func _handle_attack():
 	"""Make the player attack"""
-	# Play the attack animation
-	state += "_Attack"
-	$AnimationPlayer.play(state)
-	
-	# Activate attack cooldown
-	$Timers/AttackCooldown.start()
+	# If player can explode
+	if explosions > 0:
+		# Play the attack animation
+		state += "_Attack"
+		$AnimationPlayer.play(state)
+		
+		# Activate attack cooldown
+		$Timers/AttackCooldown.start()
 	
 func _animate():
 	"""Animate the player"""
+	# If attack animation isn't finished, return
+	if state.find("_Attack"):
+		if not $AnimationPlayer.animation_finished:
+			return
+			
 	# Play the run animation
 	if state == "Run":
 		$AnimationPlayer.play("Run")
@@ -121,3 +139,30 @@ func _animate():
 func _run():
 	"""Make the player run again"""
 	state = "Run"
+	
+func _explode():
+	"""Explode the bomb"""
+	# Emit particles
+	
+	# Start the explosion attack
+	$Timers/ExplodeDuration.start()
+	
+	# Emit explosion signal
+	explode.emit()
+	
+	# Decrease the amount of explosions
+	# explosions -= 1
+
+
+func _on_attack_area_entered(body: Node2D) -> void:
+	"""Handle object entering player's attack area"""
+	# If there is currently an explosion going on
+	if Global.explode:
+		# If the object is already partially destroyed, make it dissapear
+		if body.destroyed:
+			body.queue_free()
+			Global.score += 20
+		# Otherwise set its state to destroyed
+		else:
+			body.destroyed = true
+			Global.score += 10

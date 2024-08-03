@@ -26,3 +26,6 @@ var difficulty_increase: float = 1.1
 
 # Array of road positions
 var roads = []
+
+# Explosion flag
+var explode = false
