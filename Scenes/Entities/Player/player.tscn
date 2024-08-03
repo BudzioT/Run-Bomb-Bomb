@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bg176qx1qv7cn"]
+[gd_scene load_steps=46 format=3 uid="uid://bg176qx1qv7cn"]
 
 [ext_resource type="Texture2D" uid="uid://b3cnjxnx8o5wq" path="res://Assets/Graphics/Bomb/bombIdle.png" id="1_0xs4u"]
 [ext_resource type="Script" path="res://Scenes/Entities/Player/player.gd" id="1_k2pvy"]
@@ -116,6 +116,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [1.06, 1.96, 2.57122, 3.18]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:state")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Idle"]
+}
 
 [sub_resource type="Animation" id="Animation_qpwny"]
 resource_name = "Jump"
@@ -142,57 +154,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"Jump"]
-}
-
-[sub_resource type="Animation" id="Animation_ciki0"]
-resource_name = "JumpAttack"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1998, 0.3996, 0.7659),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"JumpAttack"]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PointLight2D:enabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.999),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PointLight2D:energy")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.0100001, 0.2098, 0.5095, 0.8092),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [1.06, 1.96, 2.57122, 3.18]
 }
 
 [sub_resource type="Animation" id="Animation_2wdxu"]
@@ -273,19 +234,92 @@ tracks/3/keys = {
 "update": 0,
 "values": [1.06, 1.96, 2.57122, 2.87652, 3.18]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:state")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Run"]
+}
+
+[sub_resource type="Animation" id="Animation_ciki0"]
+resource_name = "Jump_Attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1998, 0.3996, 0.7659),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"JumpAttack"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0100001, 0.2098, 0.5095, 0.8092),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.06, 1.96, 2.57122, 3.18]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:state")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Jump"]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1rmal"]
 _data = {
 "Idle": SubResource("Animation_mew6q"),
 "Idle_Attack": SubResource("Animation_8ncwn"),
 "Jump": SubResource("Animation_qpwny"),
-"JumpAttack": SubResource("Animation_ciki0"),
+"Jump_Attack": SubResource("Animation_ciki0"),
 "RESET": SubResource("Animation_uh7vb"),
 "Run": SubResource("Animation_2wdxu"),
 "Run_Attack": SubResource("Animation_1bxo0")
 }
-
-[sub_resource type="AnimationRootNode" id="AnimationRootNode_8wtos"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2mirw"]
 radius = 16.0
@@ -506,20 +540,17 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1g5"]
-size = Vector2(97, 84)
+size = Vector2(119.313, 87.5)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 14
 script = ExtResource("1_k2pvy")
+state = "Jump"
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_1rmal")
 }
-tree_root = SubResource("AnimationRootNode_8wtos")
-parameters/current_length = 0.0
-parameters/current_position = 0.0
-parameters/current_delta = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 12)
@@ -529,14 +560,13 @@ shape = SubResource("CircleShape2D_2mirw")
 sprite_frames = SubResource("SpriteFrames_w14kt")
 animation = &"Idle"
 autoplay = "Idle"
-frame = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-5, -11)
 scale = Vector2(0.37, 0.37)
 enabled = false
 color = Color(1, 0.176471, 0.0588235, 1)
-energy = 0.0
+energy = 3.18
 texture = ExtResource("7_iprl6")
 
 [node name="Timers" type="Node" parent="."]
@@ -545,8 +575,11 @@ texture = ExtResource("7_iprl6")
 wait_time = 0.9
 one_shot = true
 
+[node name="AttackCooldown" type="Timer" parent="Timers"]
+one_shot = true
+
 [node name="AttackArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(0, 10)
+position = Vector2(-2, 9)
 shape = SubResource("RectangleShape2D_gk1g5")
