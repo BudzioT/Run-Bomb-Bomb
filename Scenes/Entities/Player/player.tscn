@@ -535,3 +535,9 @@ enabled = false
 color = Color(1, 0.176471, 0.0588235, 1)
 energy = 0.0
 texture = ExtResource("7_iprl6")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="RoadCooldown" type="Timer" parent="Timers"]
+wait_time = 0.3
+one_shot = true

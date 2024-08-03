@@ -30,11 +30,11 @@ position = Vector2(0, 306)
 position = Vector2(0, 463)
 
 [node name="Road4" parent="Roads" instance=ExtResource("4_7npes")]
-position = Vector2(0, 619)
+position = Vector2(0, 620)
 
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Enitties" type="Node2D" parent="."]
 
 [node name="Player" parent="Enitties" instance=ExtResource("3_ybqf7")]
-position = Vector2(75, 290)
+position = Vector2(73, 131)

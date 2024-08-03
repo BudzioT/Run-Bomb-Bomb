@@ -12,3 +12,11 @@ const objects = {
 
 # Last road index
 const last_road_index = 3
+
+# Road size
+const road_size = 152
+# Margin between the roads
+const road_margin = 5
+
+# Starting point of the player in pixels
+const starting_point = 131
