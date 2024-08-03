@@ -13,11 +13,14 @@ extends Node2D
 			
 			# Hide other objects
 			for object in $Options.get_children():
+				object.get_node("Collision").disabled = true
+				object.get_node("CollisionDestroyed").disabled = true
 				object.hide()
 			
 			# Show the correct one
 			var current_object = $Options.get_child(Global.objects[type])
 			current_object.show()
+			current_object.get_node("Collision").disabled = false
 			
 			if destroyed:
 				destroyed = true
@@ -39,25 +42,29 @@ extends Node2D
 			if destroyed:
 				# Hide the normal sprite and collisions
 				object.get_node("Sprite").hide()
+				object.get_node("Collision").disabled = true
 				object.get_node("Collision").hide()
 				
 				# Show the destroyed ones
 				object.get_node("SpriteDestroyed").show()
+				object.get_node("CollisionDestroyed").disabled = false
 				object.get_node("CollisionDestroyed").show()
 			
 			# Otherwise hide destroyed object and show normal one
 			else:
 				# Hide the normal sprite and collisions
 				object.get_node("SpriteDestroyed").hide()
+				object.get_node("CollisionDestroyed").disabled = true
 				object.get_node("CollisionDestroyed").hide()
 				
 				# Show the destroyed ones
 				object.get_node("Sprite").show()
+				object.get_node("Collision").disabled = false
 				object.get_node("Collision").show()
 
 # Movement variables				
 @export_category("Movement")
-@export var speed: int = 10
+@export var speed: int = 300
 
 
 """---------------------------- GLOBAL VARIABLES ----------------------------"""

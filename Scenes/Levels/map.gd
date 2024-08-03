@@ -19,7 +19,6 @@ extends Node2D
 """---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
 func _ready():
 	"""Initialize the map"""
-	print("INIT")
 	# Save every road position
 	for road in $Roads.get_children():
 		Global.roads.append(road.global_position)
@@ -29,7 +28,7 @@ func _ready():
 	
 	# Place correctly all the spawners
 	for index in $Spawners.get_child_count():
-		$Spawners.get_child(index).position[1] = Global.roads[index][1] + 70
+		$Spawners.get_child(index).position[1] = Global.roads[index][1]
 		
 func _process(_delta: float):
 	"""Process map changes over time"""
@@ -44,7 +43,7 @@ func _spawn_objects():
 	var object_type_index = randi_range(0, Global.objects.size() - 1)
 	
 	# Choose object type and if it's destroyed
-	var objectType: String = Global.objects
+	var objectType: String = Global.objects.keys()[object_type_index]
 	var destroyed: bool = bool(randi_range(0, 1))
 	
 	# Choose a random place to spawn the object
@@ -59,6 +58,9 @@ func _spawn_objects():
 	
 	# Set correct position
 	object.global_position = random_spawner.global_position
+	
+	# Add it to the objects
+	$Objects.add_child(object)
 	
 	# Start the cooldown
 	$Timers/Spawn.start()

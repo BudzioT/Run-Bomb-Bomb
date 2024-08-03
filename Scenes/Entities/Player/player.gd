@@ -17,17 +17,19 @@ var vertical_movement: bool = false
 # Direction of vertical movement
 var vertical_direction: int = 0
 
+# Idle state flag
+var idle = false
+
 
 """---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
 func _physics_process(_delta: float) -> void:
 	"""Process player's changes"""
-	# Handle input
-	_handle_input()
+	if not idle:
+		# Handle input
+		_handle_input()
 	
-	# Move the player
-	_move()
-	
-	print(position)
+		# Move the player
+		_move()
 
 """---------------------------- USER DEFINED FUNCTIONS ----------------------------"""
 func _handle_input():
@@ -37,8 +39,6 @@ func _handle_input():
 	
 	# Handle vertical movement
 	if direction.y and not $Timers/RoadCooldown.time_left and not vertical_movement:
-		print(direction)
-		
 		# Make sure index isn't too low
 		if direction.y < 0:
 			road_index = max(0, road_index - 1)
@@ -63,11 +63,22 @@ func _handle_input():
 		
 	# Stop vertical movement
 	direction.y = 0
-		
-	# Update velocity
-	velocity = direction * speed
+	
+	# Check for attacks
+	if Input.is_action_just_pressed("Attack"):
+		_attack()
+	
 		
 func _move():
 	"""Handle player's movement"""
+	# Update velocity
+	velocity = direction * speed
+	
 	# Apply movement
 	move_and_slide()
+	
+func _attack():
+	"""Make the player attack"""
+	pass
+	# Play the attack animation
+	# Activate attack cooldown

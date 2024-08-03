@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bg176qx1qv7cn"]
+[gd_scene load_steps=47 format=3 uid="uid://bg176qx1qv7cn"]
 
 [ext_resource type="Texture2D" uid="uid://b3cnjxnx8o5wq" path="res://Assets/Graphics/Bomb/bombIdle.png" id="1_0xs4u"]
 [ext_resource type="Script" path="res://Scenes/Entities/Player/player.gd" id="1_k2pvy"]
@@ -505,6 +505,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1g5"]
+size = Vector2(97, 84)
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 14
 script = ExtResource("1_k2pvy")
@@ -541,3 +544,9 @@ texture = ExtResource("7_iprl6")
 [node name="RoadCooldown" type="Timer" parent="Timers"]
 wait_time = 0.9
 one_shot = true
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_gk1g5")
