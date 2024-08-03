@@ -539,5 +539,5 @@ texture = ExtResource("7_iprl6")
 [node name="Timers" type="Node" parent="."]
 
 [node name="RoadCooldown" type="Timer" parent="Timers"]
-wait_time = 0.3
+wait_time = 0.9
 one_shot = true

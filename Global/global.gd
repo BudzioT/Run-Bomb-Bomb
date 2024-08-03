@@ -11,12 +11,15 @@ const objects = {
 }
 
 # Last road index
-const last_road_index = 3
+var last_road_index: int = 3
 
 # Road size
-const road_size = 152
-# Margin between the roads
-const road_margin = 5
-
+var road_size: Vector2
 # Starting point of the player in pixels
-const starting_point = 131
+const starting_point: int = 131
+
+# Speed of map scroll
+const scroll_speed: float = 1.0
+
+# Array of road positions
+var roads = []

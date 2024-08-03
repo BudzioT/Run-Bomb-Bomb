@@ -3,11 +3,14 @@ extends CharacterBody2D
 
 """---------------------------- GLOBAL VARIABLES ----------------------------"""
 @export_category("Movement")
-@export var speed: int = 100
+@export var speed: int = 200
 var direction: Vector2
 
 # Current road index that player's on
-var road_index: int = 1
+var road_index: int = 0
+
+# Player's height
+@export var height: int = 50
 
 # Vertical movement flag
 var vertical_movement: bool = false
@@ -16,13 +19,15 @@ var vertical_direction: int = 0
 
 
 """---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	"""Process player's changes"""
 	# Handle input
 	_handle_input()
 	
 	# Move the player
 	_move()
+	
+	print(position)
 
 """---------------------------- USER DEFINED FUNCTIONS ----------------------------"""
 func _handle_input():
@@ -50,20 +55,19 @@ func _handle_input():
 	
 	# If player's moving vertically, keep him accelerated
 	if vertical_movement:
-		direction.y = vertical_direction
+		# Create a tween for moving vertically
+		var newPos = Global.roads[road_index].y - int(float(height) / 2)
+		var tween = create_tween()
+		tween.tween_property(self, "position:y", newPos, Global.scroll_speed)
+		vertical_movement = false
+		
+	# Stop vertical movement
+	direction.y = 0
 		
 	# Update velocity
 	velocity = direction * speed
 		
 func _move():
 	"""Handle player's movement"""
-	# If player wants to move horizontally
-	if velocity.y:
-		if position.y == \
-			Global.starting_point + road_index * (Global.road_size + Global.road_margin):
-			# Stop moving if position is already good
-			velocity.y = 0
-			vertical_movement = false
-	
 	# Apply movement
 	move_and_slide()

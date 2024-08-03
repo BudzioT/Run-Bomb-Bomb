@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dn00su8pqnqjl"]
+[gd_scene load_steps=7 format=3 uid="uid://dn00su8pqnqjl"]
 
 [ext_resource type="Shader" path="res://Scenes/Levels/map.gdshader" id="1_4dn2k"]
+[ext_resource type="Script" path="res://Scenes/Levels/map.gd" id="1_i60ow"]
 [ext_resource type="Texture2D" uid="uid://dkofhqgij3op7" path="res://Assets/Graphics/Map/Road.png" id="1_xg085"]
 [ext_resource type="PackedScene" uid="uid://bg176qx1qv7cn" path="res://Scenes/Entities/Player/player.tscn" id="3_ybqf7"]
 [ext_resource type="PackedScene" uid="uid://pfndxjithunk" path="res://Scenes/Helpers/road.tscn" id="4_7npes"]
@@ -10,6 +11,7 @@ shader = ExtResource("1_4dn2k")
 shader_parameter/scrollSpeed = 0.2
 
 [node name="Map" type="Node2D"]
+script = ExtResource("1_i60ow")
 
 [node name="Sprite" type="TextureRect" parent="."]
 texture_repeat = 2
@@ -38,3 +40,8 @@ position = Vector2(0, 620)
 
 [node name="Player" parent="Enitties" instance=ExtResource("3_ybqf7")]
 position = Vector2(73, 131)
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Spawners"]
+position = Vector2(1100, 143)
