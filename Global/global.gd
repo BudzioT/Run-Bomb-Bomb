@@ -87,7 +87,7 @@ var score = 0:
 			difficulty *= difficulty_increase
 			
 			# Increase score earned
-			score_normal_increase *= int(begin_stats["score_normal"] * (difficulty - 0.1))
+			score_normal_increase = int(begin_stats["score_normal"] * (difficulty - 0.1))
 			score_destroyed_increase = int(begin_stats["score_destroyed"] * (difficulty - 0.1))
 			
 			# Decrease spawn time
@@ -102,7 +102,7 @@ var score = 0:
 			vertical_speed = max(begin_stats["vertical_speed"] / difficulty, 0.4)
 			
 			# Set the proper scroll speed
-			scroll_speed = begin_stats["scroll_speed"] * difficulty + 0.1
+			scroll_speed += 0.1
 			
 			# Update the stats
 			stats_changed.emit()

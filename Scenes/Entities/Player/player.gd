@@ -126,8 +126,17 @@ func _handle_attack():
 	"""Make the player attack"""
 	# If player can explode
 	if explosions > 0:
-		# Play the attack animation
+		# Set the animation to attack one
 		state += "_Attack"
+		
+		# Make sure this is the right state
+		if (state == "_Attack"):
+			state = "Idle_Attack"
+			
+		# Start emitting particles
+		$Particles/AttackParticles.emitting = true
+		
+		# Play the animation
 		$AnimationPlayer.play(state)
 		
 		# Activate attack cooldown
@@ -176,8 +185,11 @@ func _explode():
 	
 func hit():
 	"""Hit the player"""
-	print("PLAYER HIT")
+	# Set the flag
 	death = true
+	
+	# Emit death particles
+	$Particles/DeathParticles.emitting = true
 	
 	# Make the player unable to move
 	can_move = false
