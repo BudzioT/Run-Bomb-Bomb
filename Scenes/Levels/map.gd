@@ -137,10 +137,14 @@ func _create_explosion(pos: Vector2, type: int) -> void:
 	# Set its type
 	explosion.explosion_type = type
 	
+	# Create proper effect
 	if type == 0:
 		explosion.play("Normal")
 	else:
 		explosion.play("Huge")
+		
+	# Play explosion sound effect
+	$ExplosionSound.play()
 		
 func _enemy_explosion(pos: Vector2) -> void:
 	"""Create explosion made by the enemy"""
@@ -150,6 +154,9 @@ func _enemy_explosion(pos: Vector2) -> void:
 	
 	# Set the position
 	enemy_explosion.position = pos
+	
+	# Play explosion sound effect
+	$ExplosionSound.play()
 	
 	# Wait for the explosion to end
 	await enemy_explosion.animation_finished

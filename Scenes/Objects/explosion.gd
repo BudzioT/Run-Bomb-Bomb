@@ -25,6 +25,9 @@ func _animation_finished() -> void:
 	
 func _attack_area_entered(body: Node2D) -> void:
 	"""Handle object entering player's attack area"""
+	# Play hit sound
+	$HitSound.play()
+	
 	# If the object is already partially destroyed, make it dissapear
 	if body.get_parent().get_parent().destroyed:
 		body.queue_free()

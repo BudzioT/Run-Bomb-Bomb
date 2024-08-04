@@ -246,5 +246,7 @@ amount = 30
 process_material = SubResource("ParticleProcessMaterial_dp0xq")
 lifetime = 0.7
 
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="animation_finished" from="." to="." method="_animation_finished"]
 [connection signal="body_entered" from="AttackArea" to="." method="_attack_area_entered"]

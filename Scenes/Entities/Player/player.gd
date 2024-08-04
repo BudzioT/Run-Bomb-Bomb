@@ -191,6 +191,9 @@ func hit():
 	# Emit death particles
 	$Particles/DeathParticles.emitting = true
 	
+	# Play hit sound
+	$HitSound.play()
+	
 	# Make the player unable to move
 	can_move = false
 	
