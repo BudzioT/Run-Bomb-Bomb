@@ -53,3 +53,10 @@ func _deal_damage(body: Node2D) -> void:
 	"""Damage the entity"""
 	# Emit signal to explode
 	enemy_explode.emit(position)
+	
+	# Hit the body, if it's possible
+	if body.has_method("hit"):
+		body.hit()
+		
+	# Remove the enemy
+	queue_free()

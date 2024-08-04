@@ -1,0 +1,142 @@
+[gd_scene load_steps=21 format=3 uid="uid://bgatc32gs205m"]
+
+[ext_resource type="Texture2D" uid="uid://bbrtsicviuhqj" path="res://Assets/Graphics/Effects/explosion1.png" id="1_u2fdc"]
+[ext_resource type="Script" path="res://Scenes/Objects/enemy_explosion.gd" id="2_cwo3k"]
+[ext_resource type="Texture2D" uid="uid://b4v2gi1og7sl4" path="res://Assets/Graphics/Tilesets/light.png" id="2_rp6yd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfkik"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4v6pk"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjr5g"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjwnu"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq07s"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qh50a"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s60rl"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uwgf"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yaff"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8qin"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j00x1"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gfm3"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6j2p7"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_er3fb"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf88g"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8qqr"]
+atlas = ExtResource("1_u2fdc")
+region = Rect2(960, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jlq5l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfkik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4v6pk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjr5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjwnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wq07s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qh50a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s60rl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3uwgf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yaff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8qin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j00x1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gfm3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6j2p7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_er3fb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf88g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8qqr")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="EnemyExplosion" type="AnimatedSprite2D"]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_jlq5l")
+autoplay = "default"
+frame = 15
+frame_progress = 1.0
+script = ExtResource("2_cwo3k")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-4.76837e-07, -4.76837e-07)
+scale = Vector2(0.601, 0.601)
+color = Color(1, 0.215686, 0.0901961, 1)
+energy = 4.28
+texture = ExtResource("2_rp6yd")
+
+[connection signal="animation_finished" from="." to="." method="_animation_finished"]

@@ -75,3 +75,14 @@ func _process(delta: float) -> void:
 	# If it's too far away, remove it
 	if position.x < -100:
 		queue_free()
+		
+		
+"""---------------------------- USER DEFINED FUNCTIONS ----------------------------"""
+func hit():
+	"""Handle object getting hit"""
+	if not destroyed:
+		destroyed = true
+		Global.score += Global.score_normal_increase
+	else:
+		queue_free()
+		Global.score += Global.score_destroyed_increase

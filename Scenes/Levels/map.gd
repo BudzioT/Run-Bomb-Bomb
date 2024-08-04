@@ -16,6 +16,7 @@ extends Node2D
 @export var object_scene: PackedScene
 # Explosion one
 @export var explosion_scene: PackedScene
+@export var enemy_explosion_scene: PackedScene
 # Enemy object
 @export var enemy_scene: PackedScene
 
@@ -97,6 +98,9 @@ func _spawn_enemies():
 	# Set the position
 	enemy.global_position = random_spawner.global_position
 	
+	# Connect the correct signal
+	enemy.connect("enemy_explode", _enemy_explosion)
+	
 	# Add it to the map
 	$Entities/Enemies.add_child(enemy)
 	
@@ -118,3 +122,19 @@ func _create_explosion(pos: Vector2, type: int):
 		explosion.play("Normal")
 	else:
 		explosion.play("Huge")
+		
+func _enemy_explosion(pos: Vector2):
+	"""Create explosion made by the enemy"""
+	# Create it
+	var enemy_explosion = enemy_explosion_scene.instantiate()
+	$Effects.add_child(enemy_explosion)
+	
+	# Set the position
+	enemy_explosion.position = pos
+	
+	# If player died, stop his movement
+	if $Entities/Player.death:
+		
+	
+	# Wait for the explosion to end
+	await enemy_explosion.animation_finished

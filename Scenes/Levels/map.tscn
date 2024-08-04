@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dn00su8pqnqjl"]
+[gd_scene load_steps=11 format=3 uid="uid://dn00su8pqnqjl"]
 
 [ext_resource type="Shader" path="res://Scenes/Levels/map.gdshader" id="1_4dn2k"]
 [ext_resource type="Script" path="res://Scenes/Levels/map.gd" id="1_i60ow"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c0q7g42lmmbx6" path="res://Scenes/Objects/damagable_object.tscn" id="2_oahu8"]
 [ext_resource type="PackedScene" uid="uid://wr7t8ujw3orb" path="res://Scenes/Objects/explosion.tscn" id="3_2vcpl"]
 [ext_resource type="PackedScene" uid="uid://bg176qx1qv7cn" path="res://Scenes/Entities/Player/player.tscn" id="3_ybqf7"]
+[ext_resource type="PackedScene" uid="uid://bgatc32gs205m" path="res://Scenes/Objects/enemy_explosion.tscn" id="4_0jux1"]
 [ext_resource type="PackedScene" uid="uid://pfndxjithunk" path="res://Scenes/Helpers/road.tscn" id="4_7npes"]
 [ext_resource type="PackedScene" uid="uid://c1rr86l6a5fg7" path="res://Scenes/Objects/enemy_object.tscn" id="4_m4jlb"]
 
@@ -15,8 +16,11 @@ shader_parameter/scrollSpeed = 0.2
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_i60ow")
+spawner_margin = null
+spawn_rate = null
 object_scene = ExtResource("2_oahu8")
 explosion_scene = ExtResource("3_2vcpl")
+enemy_explosion_scene = ExtResource("4_0jux1")
 enemy_scene = ExtResource("4_m4jlb")
 
 [node name="Sprite" type="TextureRect" parent="."]

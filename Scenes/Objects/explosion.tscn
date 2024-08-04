@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://wr7t8ujw3orb"]
+[gd_scene load_steps=33 format=3 uid="uid://wr7t8ujw3orb"]
 
 [ext_resource type="Texture2D" uid="uid://bbrtsicviuhqj" path="res://Assets/Graphics/Effects/explosion1.png" id="1_qqjke"]
 [ext_resource type="Texture2D" uid="uid://caihbnbo8kb6m" path="res://Assets/Graphics/Effects/explosion0.png" id="1_ylk6v"]
 [ext_resource type="Script" path="res://Scenes/Objects/explosion.gd" id="3_pr8se"]
+[ext_resource type="Texture2D" uid="uid://b4v2gi1og7sl4" path="res://Assets/Graphics/Tilesets/light.png" id="4_1hqs7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4wfr"]
 atlas = ExtResource("1_qqjke")
@@ -207,6 +208,8 @@ position = Vector2(-1, 1)
 scale = Vector2(2.32031, 2.02602)
 sprite_frames = SubResource("SpriteFrames_8jk7t")
 animation = &"Normal"
+frame = 9
+frame_progress = 1.0
 script = ExtResource("3_pr8se")
 
 [node name="AttackArea" type="Area2D" parent="."]
@@ -218,6 +221,13 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2(0, -1.0006)
 shape = SubResource("RectangleShape2D_gk1g5")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0.861954, -0.493579)
+scale = Vector2(0.405674, 0.376108)
+color = Color(1, 0.321569, 0.278431, 1)
+energy = 4.49
+texture = ExtResource("4_1hqs7")
 
 [connection signal="animation_finished" from="." to="." method="_animation_finished"]
 [connection signal="body_entered" from="AttackArea" to="." method="_attack_area_entered"]

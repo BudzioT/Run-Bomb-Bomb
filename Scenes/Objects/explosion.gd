@@ -28,8 +28,8 @@ func _attack_area_entered(body: Node2D) -> void:
 	# If the object is already partially destroyed, make it dissapear
 	if body.get_parent().get_parent().destroyed:
 		body.queue_free()
-		Global.score += 20
+		Global.score += Global.score_destroyed_increase
 	# Otherwise set its state to destroyed
 	else:
 		body.get_parent().get_parent().destroyed = true
-		Global.score += 10
+		Global.score += Global.score_normal_increase

@@ -24,6 +24,10 @@ Global="*res://Global/global.gd"
 window/size/viewport_width=1024
 window/size/viewport_height=768
 
+[global_group]
+
+Player="Player node"
+
 [input]
 
 Up={

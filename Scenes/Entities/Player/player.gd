@@ -32,6 +32,9 @@ var vertical_direction: int = 0
 # Number of explosions left
 @export var explosions: int = 5
 
+# Death flag
+var death: bool = false
+
 
 """---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
 func _ready():
@@ -160,3 +163,8 @@ func _explode():
 	
 	# Decrease the amount of explosions
 	# explosions -= 1
+	
+func hit():
+	"""Hit the player"""
+	print("PLAYER HIT")
+	death = true
