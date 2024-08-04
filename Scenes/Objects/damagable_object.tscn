@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0q7g42lmmbx6"]
+
+[ext_resource type="Texture2D" uid="uid://bstwtebl0bo41" path="res://Assets/Graphics/Tilesets/Objects.png" id="1_ip2gl"]
+
+[node name="DamagableObject" type="Node2D"]
+
+[node name="Options" type="Node2D" parent="."]
+
+[node name="Crate" type="StaticBody2D" parent="Options"]
+visible = false
+
+[node name="Sprite" type="Sprite2D" parent="Options/Crate"]
+texture = ExtResource("1_ip2gl")
+hframes = 5
+
+[node name="Collision" type="CollisionPolygon2D" parent="Options/Crate"]
+polygon = PackedVector2Array(-26, 26, 26, 26, 26, -26, -26, -26)
+
+[node name="Barrel" type="StaticBody2D" parent="Options"]
+visible = false
+
+[node name="Sprite" type="Sprite2D" parent="Options/Barrel"]
+texture = ExtResource("1_ip2gl")
+hframes = 5
+frame = 1
+
+[node name="Collision" type="CollisionPolygon2D" parent="Options/Barrel"]
+polygon = PackedVector2Array(-16, 26, -16, 24, -18, 24, -18, 16, -20, 16, -20, 8, -22, 8, -22, -6, -20, -6, -20, -12, -18, -12, -18, -20, -16, -20, -16, -22, 16, -22, 16, -20, 18, -20, 18, -12, 20, -12, 20, -6, 22, -6, 22, 8, 20, 8, 20, 16, 18, 16, 18, 24, 16, 24, 16, 26)
+
+[node name="Lamp" type="StaticBody2D" parent="Options"]
+
+[node name="Sprite" type="Node2D" parent="Options/Lamp"]
+
+[node name="Sprite" type="Sprite2D" parent="Options/Lamp/Sprite"]
+texture = ExtResource("1_ip2gl")
+hframes = 5
+frame = 2
+
+[node name="Sprite2" type="Sprite2D" parent="Options/Lamp/Sprite"]
+position = Vector2(0, -64)
+texture = ExtResource("1_ip2gl")
+hframes = 5
+frame = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Options/Lamp"]
+
+[node name="FireHydrant" type="StaticBody2D" parent="Options"]
+visible = false
+
+[node name="Sprite" type="Sprite2D" parent="Options/FireHydrant"]
+texture = ExtResource("1_ip2gl")
+hframes = 5
+frame = 4

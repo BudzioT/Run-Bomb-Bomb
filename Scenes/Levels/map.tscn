@@ -44,7 +44,6 @@ position = Vector2(0, 620)
 
 [node name="Player" parent="Enitties" instance=ExtResource("3_ybqf7")]
 position = Vector2(73, 131)
-state = ""
 
 [node name="Spawners" type="Node2D" parent="."]
 

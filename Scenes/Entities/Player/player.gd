@@ -75,8 +75,9 @@ func _handle_input():
 	
 	# If player's moving vertically, keep him accelerated
 	if vertical_movement:
-		# Set the correct state
-		state = "Jump"
+		# Set the correct state, if player isn't attacking
+		if not state.find("_Attack"):
+			state = "Jump"
 		
 		# Calculate proper player's position on the new track
 		var newPos = Global.roads[road_index].y - int(float(height) / 2)
@@ -84,8 +85,7 @@ func _handle_input():
 		# Create a tween for moving vertically
 		var tween = create_tween()
 		tween.tween_property(self, "position:y", newPos, 1.0 / Global.scroll_speed)
-		# Wait for the animation to finish
-		tween.tween_interval(min(0.6 * Global.scroll_speed, 1.2))
+	
 		# On ending moving, return the animation to run
 		tween.tween_callback(_run)
 		
@@ -138,6 +138,11 @@ func _animate():
 		
 func _run():
 	"""Make the player run again"""
+	# Wait for the animation to finish
+	#tween.tween_interval(min(0.6 * Global.scroll_speed, 1.2))
+	await $AnimationPlayer.animation_finished
+	
+	# Set run state
 	state = "Run"
 	
 func _explode():
