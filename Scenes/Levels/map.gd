@@ -28,6 +28,9 @@ func _ready():
 	for road in $Roads.get_children():
 		Global.roads.append(road.global_position)
 		
+	# Set the correct spawn time
+	$Timers/Spawn.wait_time = Global.spawn_time
+		
 	# Save road count
 	Global.last_road_index = $Roads.get_child_count() - 1
 	
@@ -131,10 +134,6 @@ func _enemy_explosion(pos: Vector2):
 	
 	# Set the position
 	enemy_explosion.position = pos
-	
-	# If player died, stop his movement
-	if $Entities/Player.death:
-		
 	
 	# Wait for the explosion to end
 	await enemy_explosion.animation_finished

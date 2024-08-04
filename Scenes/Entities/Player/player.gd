@@ -34,6 +34,8 @@ var vertical_direction: int = 0
 
 # Death flag
 var death: bool = false
+# Movement ability flag
+var can_move: bool = true
 
 
 """---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
@@ -77,7 +79,7 @@ func _handle_input():
 		vertical_movement = true
 	
 	# If player's moving vertically, keep him accelerated
-	if vertical_movement:
+	if vertical_movement and can_move:
 		# Set the correct state, if player isn't attacking
 		if not state.find("_Attack"):
 			state = "Jump"
@@ -105,11 +107,12 @@ func _handle_input():
 		
 func _move():
 	"""Handle player's movement"""
-	# Update velocity
-	velocity = direction * speed
-	
-	# Apply movement
-	move_and_slide()
+	if can_move:
+		# Update velocity
+		velocity = direction * speed
+		
+		# Apply movement
+		move_and_slide()
 	
 func _handle_attack():
 	"""Make the player attack"""
@@ -168,3 +171,6 @@ func hit():
 	"""Hit the player"""
 	print("PLAYER HIT")
 	death = true
+	
+	# Make the player unable to move
+	can_move = false
