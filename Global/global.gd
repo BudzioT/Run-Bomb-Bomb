@@ -1,6 +1,10 @@
 extends Node
 
 
+"""---------------------------- SIGNALS ----------------------------"""
+signal stats_changed()
+
+
 """---------------------------- GLOBAL VARIABLES ----------------------------"""
 # Dictionary of objects
 const objects = {
@@ -27,7 +31,7 @@ const starting_point: int = 131
 var roads = []
 
 # Speed of map scroll
-var scroll_speed: float = 1.0
+var scroll_speed: float = 0.2
 
 # Current difficulty level
 var difficulty: float = 1.0
@@ -43,10 +47,12 @@ var enemy_speed = {
 }
 # Normal objects speed
 var objects_speed: int = 300
+# Player vertical speed in time
+var vertical_speed: float = 1.0
 
 # Score increase values
-var score_normal_increase: int = 10
-var score_destroyed_increase: int = 20
+var score_normal_increase: int = int(10)
+var score_destroyed_increase: int = int(20)
 
 # Spawn time of the enemies
 var spawn_time: float = 2.0
@@ -61,7 +67,8 @@ const begin_stats = {
 	"objects_speed": 300,
 	"Bullet_speed": 400,
 	"Dynamite_speed": 300,
-	"scroll_speed": 1.0
+	"scroll_speed": 1.0,
+	"vertical_speed": 1.0
 }
 
 
@@ -88,21 +95,28 @@ var score = 0:
 			
 			# Increase speed of the enemies
 			for enemy in enemy_speed.keys():
-				enemy_speed[enemy + "_speed"] = int(begin_stats[enemy] * difficulty)
+				enemy_speed[enemy] = int(begin_stats[enemy + "_speed"] * difficulty)
 			# And the speed of objects
 			objects_speed = int(begin_stats["objects_speed"] * difficulty)
+			# Update player's speed too
+			vertical_speed = max(begin_stats["vertical_speed"] / difficulty, 0.4)
 			
 			# Set the proper scroll speed
-			scroll_speed = int(begin_stats["scroll_speed"] * difficulty)
+			scroll_speed = begin_stats["scroll_speed"] * difficulty + 0.1
+			
+			# Update the stats
+			stats_changed.emit()
+			
+			print("STATS CHANGED")
 		
-		print(enemy_speed["bullet"])
+		print(enemy_speed["Bullet"])
 
 
 """---------------------------- USER DEFINED FUNCTIONS ----------------------------"""
-func start_game():
+func start_game() -> void:
 	"""Start the game"""
 	pass
 	
-func end_game():
+func end_game() -> void:
 	"""End the game"""
 	pass

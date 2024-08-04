@@ -22,6 +22,11 @@ var road_index: int = 0
 var vertical_movement: bool = false
 # Direction of vertical movement
 var vertical_direction: int = 0
+# Speed of vertical movement in time
+var vertical_speed: float = Global.vertical_speed:
+	# Set the time required to move
+	set(value):
+		vertical_speed = value
 
 # Animations related variables
 @export_category("Animations")
@@ -42,6 +47,9 @@ var can_move: bool = true
 func _ready():
 	"""Prepare the player"""
 	state = "Run"
+	
+	# Connect the right signal, when stats change
+	Global.connect("stats_changed", _update_stats)
 
 func _physics_process(_delta: float) -> void:
 	"""Process player's changes"""
@@ -89,7 +97,7 @@ func _handle_input():
 		
 		# Create a tween for moving vertically
 		var tween = create_tween()
-		tween.tween_property(self, "position:y", newPos, 1.0 / Global.scroll_speed)
+		tween.tween_property(self, "position:y", newPos, vertical_speed)
 	
 		# On ending moving, return the animation to run
 		tween.tween_callback(_run)
@@ -145,7 +153,6 @@ func _animate():
 func _run():
 	"""Make the player run again"""
 	# Wait for the animation to finish
-	#tween.tween_interval(min(0.6 * Global.scroll_speed, 1.2))
 	await $AnimationPlayer.animation_finished
 	
 	# Set run state
@@ -174,3 +181,7 @@ func hit():
 	
 	# Make the player unable to move
 	can_move = false
+	
+func _update_stats():
+	"""Update statistics related to the player"""
+	vertical_speed = Global.vertical_speed

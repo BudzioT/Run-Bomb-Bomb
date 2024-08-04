@@ -2,7 +2,7 @@ extends AnimatedSprite2D
 
 
 """---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
-func _ready():
+func _ready() -> void:
 	"""Prepare the explosion"""
 	pass
 

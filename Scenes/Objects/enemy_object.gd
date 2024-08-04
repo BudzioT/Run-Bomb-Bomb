@@ -31,6 +31,11 @@ signal enemy_explode(pos: Vector2)
 
 
 """---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
+func _ready() -> void:
+	"""Prepare the enemy object"""
+	# Connect the right function to update stats
+	Global.connect("stats_changed", _update_stats)
+
 func _process(delta: float) -> void:
 	"""Process enemy object's changes over time"""
 	# Move the enemy depending on its speed
@@ -60,3 +65,7 @@ func _deal_damage(body: Node2D) -> void:
 		
 	# Remove the enemy
 	queue_free()
+	
+func _update_stats() -> void:
+	"""Update enemy's stats"""
+	speed = Global.enemy_speed[type]

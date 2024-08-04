@@ -21,6 +21,7 @@ extends Node2D
 			current_object.show()
 			current_object.get_node("Collision").disabled = false
 			
+			# Set the correct state, to update sprites and collisions
 			if destroyed:
 				destroyed = true
 			else:
@@ -63,10 +64,15 @@ extends Node2D
 
 # Movement variables				
 @export_category("Movement")
-@export var speed: int = 300
+@export var speed: int = Global.objects_speed
 
 
 """---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
+func _ready() -> void:
+	"""Initialize the object"""
+	# Connect the right function to update stats
+	Global.connect("stats_changed", _update_stats)
+
 func _process(delta: float) -> void:
 	"""Process object's changes over frames"""
 	# Move the object
@@ -78,7 +84,7 @@ func _process(delta: float) -> void:
 		
 		
 """---------------------------- USER DEFINED FUNCTIONS ----------------------------"""
-func hit():
+func hit() -> void:
 	"""Handle object getting hit"""
 	if not destroyed:
 		destroyed = true
@@ -86,3 +92,7 @@ func hit():
 	else:
 		queue_free()
 		Global.score += Global.score_destroyed_increase
+		
+func _update_stats() -> void:
+	"""Update stats of the object"""
+	speed = Global.objects_speed
