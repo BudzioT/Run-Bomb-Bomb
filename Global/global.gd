@@ -106,16 +106,28 @@ var score = 0:
 			
 			# Update the stats
 			stats_changed.emit()
-			
-			print("STATS CHANGED")
 		
-		print(enemy_speed["Bullet"])
+		
+"""---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
+func _ready() -> void:
+	"""Prepare the global script"""
+	pass
 
 
 """---------------------------- USER DEFINED FUNCTIONS ----------------------------"""
 func start_game() -> void:
 	"""Start the game"""
-	pass
+	# Reset all stats
+	difficulty = 1.0
+	diffculty_time = begin_stats["difficulty_time"]
+	score_normal_increase = begin_stats["score_normal"]
+	score_destroyed_increase = begin_stats["score_destroyed"]
+	spawn_time = begin_stats["spawn_time"]
+	objects_speed = begin_stats["objects_speed"]
+	enemy_speed["Dynamite"] = begin_stats["Dynamite_speed"]
+	enemy_speed["Bullet"] = begin_stats["Bullet_speed"]
+	scroll_speed = begin_stats["scroll_speed"]
+	vertical_speed = begin_stats["vertical_speed"]
 	
 func end_game() -> void:
 	"""End the game"""
