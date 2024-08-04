@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dn00su8pqnqjl"]
+[gd_scene load_steps=14 format=3 uid="uid://dn00su8pqnqjl"]
 
 [ext_resource type="Shader" path="res://Scenes/Levels/map.gdshader" id="1_4dn2k"]
 [ext_resource type="Script" path="res://Scenes/Levels/map.gd" id="1_i60ow"]
@@ -22,6 +22,9 @@ font_size = 26
 font_color = Color(0.913725, 0.678431, 0.564706, 1)
 outline_size = 2
 outline_color = Color(0.751009, 0.310757, 0.586832, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmak8"]
+size = Vector2(173, 782)
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_i60ow")
@@ -83,7 +86,7 @@ autostart = true
 
 [node name="Effects" type="Node2D" parent="."]
 
-[node name="Label" type="Label" parent="."]
+[node name="ScoreLabel" type="Label" parent="."]
 offset_left = 572.0
 offset_top = 18.0
 offset_right = 994.0
@@ -91,3 +94,16 @@ offset_bottom = 54.0
 text = "0"
 label_settings = SubResource("LabelSettings_4nsli")
 horizontal_alignment = 2
+
+[node name="DeadZone" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeadZone"]
+position = Vector2(-90, 381)
+shape = SubResource("RectangleShape2D_mmak8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DeadZone"]
+position = Vector2(1112, 386)
+shape = SubResource("RectangleShape2D_mmak8")
+
+[connection signal="body_entered" from="DeadZone" to="." method="_dead_zone_entered"]

@@ -194,6 +194,13 @@ func hit():
 	# Make the player unable to move
 	can_move = false
 	
+	# Wait some time
+	$Timers/AttackCooldown.start()
+	await $Timers/AttackCooldown.timeout
+	
+	# Show the game over screen
+	get_tree().change_scene_to_file("res://Scenes/Ui/game_over_screen.tscn")
+	
 func _update_stats():
 	"""Update statistics related to the player"""
 	vertical_speed = Global.vertical_speed

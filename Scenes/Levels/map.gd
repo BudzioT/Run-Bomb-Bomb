@@ -53,6 +53,9 @@ func _ready() -> void:
 	
 	# Make sure to update the stats when they are changed
 	Global.connect("stats_changed", _update_stats)
+	
+	# Update the score text value when it's changed
+	Global.connect("score_changed", _update_score)
 		
 func _process(_delta: float) -> void:
 	"""Process map changes over time"""
@@ -155,3 +158,12 @@ func _update_stats() -> void:
 	"""Update the current statistics"""
 	spawn_rate = Global.spawn_time
 	scroll_speed = Global.scroll_speed
+	
+func _update_score() -> void:
+	"""Update game's score"""
+	$ScoreLabel.text = str(Global.score)
+
+
+func _dead_zone_entered(_body: Node2D) -> void:
+	"""Make the player die, when he enters the dead zone"""
+	$Entities/Player.hit()

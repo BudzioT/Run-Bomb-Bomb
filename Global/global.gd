@@ -3,6 +3,7 @@ extends Node
 
 """---------------------------- SIGNALS ----------------------------"""
 signal stats_changed()
+signal score_changed()
 
 
 """---------------------------- GLOBAL VARIABLES ----------------------------"""
@@ -106,6 +107,8 @@ var score = 0:
 			
 			# Update the stats
 			stats_changed.emit()
+			
+		score_changed.emit()
 		
 		
 """---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
