@@ -1,0 +1,123 @@
+[gd_scene load_steps=16 format=3 uid="uid://c1rr86l6a5fg7"]
+
+[ext_resource type="Texture2D" uid="uid://cqkic4rnolo1s" path="res://Assets/Graphics/Enemies/Tnt.png" id="1_27uyv"]
+[ext_resource type="Script" path="res://Scenes/Objects/enemy_object.gd" id="1_iitvl"]
+[ext_resource type="Texture2D" uid="uid://b4v2gi1og7sl4" path="res://Assets/Graphics/Tilesets/light.png" id="2_v7q7t"]
+[ext_resource type="Texture2D" uid="uid://jx2f5wg2h3pt" path="res://Assets/Graphics/Enemies/Bullet.png" id="3_2v5wf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk76k"]
+atlas = ExtResource("3_2v5wf")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k7g1"]
+atlas = ExtResource("3_2v5wf")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xailq"]
+atlas = ExtResource("3_2v5wf")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oavov"]
+atlas = ExtResource("3_2v5wf")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bx87h"]
+atlas = ExtResource("3_2v5wf")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r76rn"]
+atlas = ExtResource("3_2v5wf")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kfsr"]
+atlas = ExtResource("3_2v5wf")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5g3h"]
+atlas = ExtResource("3_2v5wf")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lb5vw"]
+atlas = ExtResource("3_2v5wf")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpw8e"]
+atlas = ExtResource("3_2v5wf")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_375ex"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wk76k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k7g1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xailq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oavov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bx87h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r76rn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kfsr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5g3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lb5vw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpw8e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="EnemyObject" type="Node2D"]
+script = ExtResource("1_iitvl")
+
+[node name="Options" type="Node2D" parent="."]
+
+[node name="Dynamite" type="StaticBody2D" parent="Options"]
+visible = false
+
+[node name="Sprite" type="Sprite2D" parent="Options/Dynamite"]
+texture = ExtResource("1_27uyv")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Options/Dynamite"]
+polygon = PackedVector2Array(-10, 32, 10, 32, 10, 30, 20, 30, 20, 28, 22, 28, 22, -19, 20, -19, 20, -21, 16, -21, 16, -23, 14, -23, 14, -27, 12, -27, 12, -29, 5, -29, 5, -31, 2, -31, 2, -29, 0, -29, 0, -31, -2, -31, -2, -32, -10, -32, -10, -30, -12, -30, -12, -29, -14, -29, -14, -27, -16, -27, -16, -25, -18, -25, -18, -23, -20, -23, -20, -19, -22, -19, -22, 28, -20, 28, -20, 30, -10, 30)
+
+[node name="PointLight2D" type="PointLight2D" parent="Options/Dynamite"]
+position = Vector2(1, -24)
+scale = Vector2(0.3975, 0.31125)
+color = Color(1, 0.180392, 0.0941176, 1)
+energy = 1.21
+texture = ExtResource("2_v7q7t")
+
+[node name="Bullet" type="StaticBody2D" parent="Options"]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Options/Bullet"]
+sprite_frames = SubResource("SpriteFrames_375ex")
+autoplay = "default"
+frame = 7
+frame_progress = 0.00609071
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Options/Bullet"]
+polygon = PackedVector2Array(-8, 26, 12, 26, 12, 22, 14, 22, 14, 26, 18, 26, 18, 24, 20, 24, 20, 18, 20, -24, 18, -24, 18, -26, 14, -26, 14, -22, 12, -22, 12, -26, -8, -26, -8, -24, -12, -24, -12, -22, -14, -22, -14, -20, -16, -20, -16, -18, -18, -18, -18, -16, -20, -16, -20, -14, -22, -14, -22, -12, -24, -12, -24, -10, -26, -10, -26, -6, -28, -6, -28, -2, -30, -2, -30, 2, -28, 2, -28, 6, -26, 6, -26, 10, -24, 10, -24, 12, -22, 12, -22, 14, -20, 14, -20, 16, -18, 16, -18, 18, -16, 18, -16, 20, -14, 20, -14, 22, -12, 22, -12, 24, -8, 24)
+
+[node name="PointLight2D" type="PointLight2D" parent="Options/Bullet"]
+position = Vector2(24, -0.999999)
+scale = Vector2(0.3425, 0.3425)
+color = Color(1, 0.752941, 0.329412, 1)
+energy = 2.23
+texture = ExtResource("2_v7q7t")

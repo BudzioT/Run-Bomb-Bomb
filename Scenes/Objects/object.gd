@@ -41,24 +41,24 @@ extends Node2D
 			if destroyed:
 				# Hide the normal sprite and collisions
 				object.get_node("Sprite").hide()
-				object.get_node("Collision").disabled = true
+				object.get_node("Collision").set_deferred("disabled", true)
 				object.get_node("Collision").hide()
 				
 				# Show the destroyed ones
 				object.get_node("SpriteDestroyed").show()
-				object.get_node("CollisionDestroyed").disabled = false
+				object.get_node("CollisionDestroyed").set_deferred("disabled", false)
 				object.get_node("CollisionDestroyed").show()
 			
 			# Otherwise hide destroyed object and show normal one
 			else:
 				# Hide the normal sprite and collisions
 				object.get_node("SpriteDestroyed").hide()
-				object.get_node("CollisionDestroyed").disabled = true
+				object.get_node("CollisionDestroyed").set_deferred("disabled", true)
 				object.get_node("CollisionDestroyed").hide()
 				
 				# Show the destroyed ones
 				object.get_node("Sprite").show()
-				object.get_node("Collision").disabled = false
+				object.get_node("Collision").set_deferred("disabled", false)
 				object.get_node("Collision").show()
 
 # Movement variables				
@@ -66,7 +66,7 @@ extends Node2D
 @export var speed: int = 300
 
 
-"""---------------------------- GLOBAL VARIABLES ----------------------------"""
+"""---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
 func _process(delta: float) -> void:
 	"""Process object's changes over frames"""
 	# Move the object

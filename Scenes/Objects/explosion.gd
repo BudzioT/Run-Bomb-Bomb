@@ -18,24 +18,18 @@ extends AnimatedSprite2D
 func _ready() -> void:
 	"""Initialize the explosion"""
 	explosion_type = 0
-	print("CREATED")
 	
 func _animation_finished() -> void:
 	"""Make the explosion dissapear after finishing its animation"""
 	queue_free()
-	# Make the explosion dissapear
-	Global.explode = false
-	print("DESTROYED")
 	
 func _attack_area_entered(body: Node2D) -> void:
 	"""Handle object entering player's attack area"""
-	# If there is currently an explosion going on
-	if Global.explode:
-		# If the object is already partially destroyed, make it dissapear
-		if body.destroyed:
-			body.queue_free()
-			Global.score += 20
-		# Otherwise set its state to destroyed
-		else:
-			body.destroyed = true
-			Global.score += 10
+	# If the object is already partially destroyed, make it dissapear
+	if body.get_parent().get_parent().destroyed:
+		body.queue_free()
+		Global.score += 20
+	# Otherwise set its state to destroyed
+	else:
+		body.get_parent().get_parent().destroyed = true
+		Global.score += 10

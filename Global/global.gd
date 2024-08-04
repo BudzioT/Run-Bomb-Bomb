@@ -27,9 +27,11 @@ var difficulty_increase: float = 1.1
 # Array of road positions
 var roads = []
 
-# Explosion flag
-var explode = false
-
-
 # Player's score
 var score = 0
+
+# Speed of enemy objects
+var enemy_speed = {
+	"Dynamite": 100,
+	"Bullet": 150
+}
