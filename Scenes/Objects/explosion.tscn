@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://wr7t8ujw3orb"]
+[gd_scene load_steps=34 format=3 uid="uid://wr7t8ujw3orb"]
 
 [ext_resource type="Texture2D" uid="uid://bbrtsicviuhqj" path="res://Assets/Graphics/Effects/explosion1.png" id="1_qqjke"]
 [ext_resource type="Texture2D" uid="uid://caihbnbo8kb6m" path="res://Assets/Graphics/Effects/explosion0.png" id="1_ylk6v"]
@@ -203,6 +203,18 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1g5"]
 size = Vector2(96.5653, 60.7965)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dp0xq"]
+particle_flag_disable_z = true
+angle_min = -271.7
+angle_max = 217.4
+spread = 155.454
+initial_velocity_min = 70.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 98, 0)
+scale_min = 5.0
+scale_max = 7.0
+color = Color(0.844473, 0.660781, 0.41568, 1)
+
 [node name="Explosion" type="AnimatedSprite2D"]
 position = Vector2(-1, 1)
 scale = Vector2(2.32031, 2.02602)
@@ -228,6 +240,11 @@ scale = Vector2(0.405674, 0.376108)
 color = Color(1, 0.321569, 0.278431, 1)
 energy = 4.49
 texture = ExtResource("4_1hqs7")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_dp0xq")
+lifetime = 0.7
 
 [connection signal="animation_finished" from="." to="." method="_animation_finished"]
 [connection signal="body_entered" from="AttackArea" to="." method="_attack_area_entered"]

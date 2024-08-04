@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bgatc32gs205m"]
+[gd_scene load_steps=22 format=3 uid="uid://bgatc32gs205m"]
 
 [ext_resource type="Texture2D" uid="uid://bbrtsicviuhqj" path="res://Assets/Graphics/Effects/explosion1.png" id="1_u2fdc"]
 [ext_resource type="Script" path="res://Scenes/Objects/enemy_explosion.gd" id="2_cwo3k"]
@@ -124,6 +124,16 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q628r"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 94.34
+initial_velocity_max = 169.82
+gravity = Vector3(0, 98, 0)
+scale_min = 5.0
+scale_max = 7.0
+color = Color(0.997444, 0.401316, 3.85046e-07, 1)
+
 [node name="EnemyExplosion" type="AnimatedSprite2D"]
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_jlq5l")
@@ -138,5 +148,10 @@ scale = Vector2(0.601, 0.601)
 color = Color(1, 0.215686, 0.0901961, 1)
 energy = 4.28
 texture = ExtResource("2_rp6yd")
+
+[node name="Particle" type="GPUParticles2D" parent="."]
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_q628r")
+lifetime = 0.7
 
 [connection signal="animation_finished" from="." to="." method="_animation_finished"]
