@@ -88,13 +88,14 @@ script = ExtResource("1_iitvl")
 
 [node name="Options" type="Node2D" parent="."]
 
-[node name="Dynamite" type="StaticBody2D" parent="Options"]
+[node name="Dynamite" type="Area2D" parent="Options"]
 visible = false
+collision_layer = 8
 
 [node name="Sprite" type="Sprite2D" parent="Options/Dynamite"]
 texture = ExtResource("1_27uyv")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Options/Dynamite"]
+[node name="Collision" type="CollisionPolygon2D" parent="Options/Dynamite"]
 polygon = PackedVector2Array(-10, 32, 10, 32, 10, 30, 20, 30, 20, 28, 22, 28, 22, -19, 20, -19, 20, -21, 16, -21, 16, -23, 14, -23, 14, -27, 12, -27, 12, -29, 5, -29, 5, -31, 2, -31, 2, -29, 0, -29, 0, -31, -2, -31, -2, -32, -10, -32, -10, -30, -12, -30, -12, -29, -14, -29, -14, -27, -16, -27, -16, -25, -18, -25, -18, -23, -20, -23, -20, -19, -22, -19, -22, 28, -20, 28, -20, 30, -10, 30)
 
 [node name="PointLight2D" type="PointLight2D" parent="Options/Dynamite"]
@@ -104,7 +105,9 @@ color = Color(1, 0.180392, 0.0941176, 1)
 energy = 1.21
 texture = ExtResource("2_v7q7t")
 
-[node name="Bullet" type="StaticBody2D" parent="Options"]
+[node name="Bullet" type="Area2D" parent="Options"]
+visible = false
+collision_layer = 8
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Options/Bullet"]
 sprite_frames = SubResource("SpriteFrames_375ex")
@@ -112,7 +115,7 @@ autoplay = "default"
 frame = 7
 frame_progress = 0.00609071
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Options/Bullet"]
+[node name="Collision" type="CollisionPolygon2D" parent="Options/Bullet"]
 polygon = PackedVector2Array(-8, 26, 12, 26, 12, 22, 14, 22, 14, 26, 18, 26, 18, 24, 20, 24, 20, 18, 20, -24, 18, -24, 18, -26, 14, -26, 14, -22, 12, -22, 12, -26, -8, -26, -8, -24, -12, -24, -12, -22, -14, -22, -14, -20, -16, -20, -16, -18, -18, -18, -18, -16, -20, -16, -20, -14, -22, -14, -22, -12, -24, -12, -24, -10, -26, -10, -26, -6, -28, -6, -28, -2, -30, -2, -30, 2, -28, 2, -28, 6, -26, 6, -26, 10, -24, 10, -24, 12, -22, 12, -22, 14, -20, 14, -20, 16, -18, 16, -18, 18, -16, 18, -16, 20, -14, 20, -14, 22, -12, 22, -12, 24, -8, 24)
 
 [node name="PointLight2D" type="PointLight2D" parent="Options/Bullet"]
@@ -121,3 +124,6 @@ scale = Vector2(0.3425, 0.3425)
 color = Color(1, 0.752941, 0.329412, 1)
 energy = 2.23
 texture = ExtResource("2_v7q7t")
+
+[connection signal="body_entered" from="Options/Dynamite" to="." method="_dynamite_entered"]
+[connection signal="body_entered" from="Options/Bullet" to="." method="_bullet_entered"]

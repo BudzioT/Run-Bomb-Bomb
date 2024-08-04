@@ -9,6 +9,11 @@ const objects = {
 	"Lamp": 2,
 	"FireHydrant": 3
 }
+# Dictionary of enemies
+const enemies = {
+	"Dynamite": 0,
+	"Bullet": 1
+}
 
 # Last road index
 var last_road_index: int = 3
@@ -32,6 +37,6 @@ var score = 0
 
 # Speed of enemy objects
 var enemy_speed = {
-	"Dynamite": 100,
-	"Bullet": 150
+	"Dynamite": 300,
+	"Bullet": 400
 }

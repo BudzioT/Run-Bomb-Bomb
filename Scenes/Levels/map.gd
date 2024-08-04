@@ -16,6 +16,8 @@ extends Node2D
 @export var object_scene: PackedScene
 # Explosion one
 @export var explosion_scene: PackedScene
+# Enemy object
+@export var enemy_scene: PackedScene
 
 
 """---------------------------- BUILT-IN FUNCTIONS ----------------------------"""
@@ -33,22 +35,27 @@ func _ready():
 		$Spawners.get_child(index).position[1] = Global.roads[index][1]
 		
 	# Connect proper explosion function to the signal
-	$Enitties/Player.connect("explode", _create_explosion)
+	$Entities/Player.connect("explode", _create_explosion)
 		
 func _process(_delta: float):
 	"""Process map changes over time"""
 	# If spawn cooldown passed, create an object
 	if not $Timers/Spawn.time_left:
-		_spawn_objects()
+		# Spawn objects with a 70% chance
+		if (randi_range(0, 9) < 7):
+			_spawn_objects()
+		# Spawn enemies with a 30% chance
+		else:
+			_spawn_enemies()
 	
 """---------------------------- USER-DEFINED FUNCTIONS ----------------------------"""
 func _spawn_objects():
 	"""Spawn random objects"""
 	# Object type index
-	var object_type_index = randi_range(0, Global.objects.size() - 1)
+	var object_type_index: int = randi_range(0, Global.objects.size() - 1)
 	
 	# Choose object type and if it's destroyed
-	var objectType: String = Global.objects.keys()[object_type_index]
+	var object_type: String = Global.objects.keys()[object_type_index]
 	var destroyed: bool = bool(randi_range(0, 1))
 	
 	# Choose a random place to spawn the object
@@ -58,7 +65,7 @@ func _spawn_objects():
 	# Create the object
 	var object = object_scene.instantiate()
 	# Set the correct variables related to it
-	object.type = objectType
+	object.type = object_type
 	object.destroyed = destroyed
 	
 	# Set correct position
@@ -66,6 +73,32 @@ func _spawn_objects():
 	
 	# Add it to the objects
 	$Objects.add_child(object)
+	
+	# Start the cooldown
+	$Timers/Spawn.start()
+	
+func _spawn_enemies():
+	"""Spawn the enemies"""
+	# Index of the enemy type
+	var enemy_index: int = randi_range(0, Global.enemies.size() - 1)
+	
+	# Get the enemy type
+	var enemy_type: String = Global.enemies.keys()[enemy_index]
+	
+	# Choose a random place to spawn it
+	var random_spawner: Marker2D = \
+		$Spawners.get_child(randi_range(0, $Spawners.get_child_count() - 1))
+		
+	# Create the enemy
+	var enemy = enemy_scene.instantiate()
+	
+	# Set its type
+	enemy.type = enemy_type
+	# Set the position
+	enemy.global_position = random_spawner.global_position
+	
+	# Add it to the map
+	$Entities/Enemies.add_child(enemy)
 	
 	# Start the cooldown
 	$Timers/Spawn.start()

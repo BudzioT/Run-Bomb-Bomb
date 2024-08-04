@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dn00su8pqnqjl"]
+[gd_scene load_steps=10 format=3 uid="uid://dn00su8pqnqjl"]
 
 [ext_resource type="Shader" path="res://Scenes/Levels/map.gdshader" id="1_4dn2k"]
 [ext_resource type="Script" path="res://Scenes/Levels/map.gd" id="1_i60ow"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://wr7t8ujw3orb" path="res://Scenes/Objects/explosion.tscn" id="3_2vcpl"]
 [ext_resource type="PackedScene" uid="uid://bg176qx1qv7cn" path="res://Scenes/Entities/Player/player.tscn" id="3_ybqf7"]
 [ext_resource type="PackedScene" uid="uid://pfndxjithunk" path="res://Scenes/Helpers/road.tscn" id="4_7npes"]
+[ext_resource type="PackedScene" uid="uid://c1rr86l6a5fg7" path="res://Scenes/Objects/enemy_object.tscn" id="4_m4jlb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_heaa6"]
 shader = ExtResource("1_4dn2k")
@@ -16,6 +17,7 @@ shader_parameter/scrollSpeed = 0.2
 script = ExtResource("1_i60ow")
 object_scene = ExtResource("2_oahu8")
 explosion_scene = ExtResource("3_2vcpl")
+enemy_scene = ExtResource("4_m4jlb")
 
 [node name="Sprite" type="TextureRect" parent="."]
 texture_repeat = 2
@@ -40,10 +42,12 @@ position = Vector2(0, 620)
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Enitties" type="Node2D" parent="."]
+[node name="Entities" type="Node2D" parent="."]
 
-[node name="Player" parent="Enitties" instance=ExtResource("3_ybqf7")]
+[node name="Player" parent="Entities" instance=ExtResource("3_ybqf7")]
 position = Vector2(73, 131)
+
+[node name="Enemies" type="Node2D" parent="Entities"]
 
 [node name="Spawners" type="Node2D" parent="."]
 

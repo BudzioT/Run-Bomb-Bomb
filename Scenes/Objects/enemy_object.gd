@@ -2,8 +2,28 @@ extends Node2D
 
 
 """---------------------------- GLOBAL VARIABLES ----------------------------"""
+signal enemy_explode(pos: Vector2)
+
+
+"""---------------------------- GLOBAL VARIABLES ----------------------------"""
 # Type of enemy object
-@export_enum("Dynamite", "Bullet") var type: String = "Dynamite"
+@export_enum("Dynamite", "Bullet") var type: String = "Dynamite":
+	# Setter
+	set(value):
+		if value:
+			type = value
+			
+			# Hide all enemy object
+			for enemy in $Options.get_children():
+				enemy.get_node("Collision").disabled = true
+				enemy.hide()
+				
+			# Show the correct enemy
+			var currentEnemy = $Options.get_child(Global.enemies[type])
+			currentEnemy.show()
+			currentEnemy.get_node("Collision").disabled = false
+			
+			speed = Global.enemy_speed[type]
 
 # Movement variables
 @export_category("Movement")
@@ -19,3 +39,17 @@ func _process(delta: float) -> void:
 	# Remove it if its too far
 	if position.x < -100:
 		queue_free()
+
+func _dynamite_entered(body: Node2D) -> void:
+	"""Handle player hitting the dynamite"""
+	_deal_damage(body)
+
+func _bullet_entered(body: Node2D) -> void:
+	"""Handle bullet hitting the player"""
+	_deal_damage(body)
+	
+"""---------------------------- USER DEFINED FUNCTIONS ----------------------------"""
+func _deal_damage(body: Node2D) -> void:
+	"""Damage the entity"""
+	# Emit signal to explode
+	enemy_explode.emit(position)
